@@ -6,9 +6,8 @@ declare module "@supabase/supabase-js" {
     };
   };
 
-  export type SupabaseAuthUser = {
-    email?: string | null;
-  } | null;
+  // --- Auth types ---
+  export type SupabaseAuthUser = { email?: string | null } | null;
 
   export type SignInWithOtpResponse = {
     error: { message?: string } | null;
@@ -19,9 +18,7 @@ declare module "@supabase/supabase-js" {
   };
 
   export type ExchangeCodeForSessionResponse = {
-    data: {
-      user: SupabaseAuthUser;
-    } | null;
+    data: { user: SupabaseAuthUser } | null;
     error: { message?: string } | null;
   };
 
@@ -31,9 +28,8 @@ declare module "@supabase/supabase-js" {
     exchangeCodeForSession: (code: string) => Promise<ExchangeCodeForSessionResponse>;
   };
 
-  export type PostgrestError = {
-    message?: string;
-  } | null;
+  // --- PostgREST types (lecture catalogue etc.) ---
+  export type PostgrestError = { message?: string } | null;
 
   export type PostgrestResponse<Row extends Record<string, unknown>> = {
     data: Row[] | null;
@@ -54,7 +50,7 @@ declare module "@supabase/supabase-js" {
           ascending?: boolean;
           nullsFirst?: boolean;
           foreignTable?: string;
-        },
+        }
       ) => PostgrestFilterBuilder<Row>;
       limit: (count: number) => PostgrestFilterBuilder<Row>;
       maybeSingle: () => Promise<PostgrestSingleResponse<Row>>;
@@ -68,13 +64,13 @@ declare module "@supabase/supabase-js" {
   export type SupabaseClient = {
     auth: SupabaseAuthApi;
     from: <Row extends Record<string, unknown> = Record<string, unknown>>(
-      table: string,
+      table: string
     ) => SupabaseQueryBuilder<Row>;
   };
 
   export function createClient(
     url: string,
     key: string,
-    options?: unknown,
+    options?: unknown
   ): SupabaseClient;
 }

@@ -1,77 +1,50 @@
-"use client";
+import type { Metadata } from "next";
+import "./globals.css";
+import { Inter } from "next/font/google";
+import ThemeProvider from "@/components/theme-provider";
+import ThemeToggle from "@/components/theme-toggle";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
-import { useState } from "react";
-import supabase from "@/lib/supabase-browser";
+const inter = Inter({ subsets: ["latin"] });
 
-export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [sent, setSent] = useState<null | "ok" | "err">(null);
-  const [loading, setLoading] = useState(false);
+export const metadata: Metadata = {
+  title: {
+    default: "Meditation",
+    template: "%s | Meditation",
+  },
+  description: "Base Next.js + Supabase, themable & rapide",
+};
 
-  async function onSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setLoading(true);
-    setSent(null);
-    try {
-      const { error } = await supabase.auth.signInWithOtp({
-        email,
-        options: {
-          emailRedirectTo: `${location.origin}/auth/callback`,
-        },
-      });
-      if (error) throw error;
-      setSent("ok");
-    } catch {
-      setSent("err");
-    } finally {
-      setLoading(false);
-    }
-  }
-
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <div className="max-w-xl mx-auto px-4 py-12">
-      <h1 className="text-3xl font-semibold tracking-tight mb-6">Connexion</h1>
+    <html lang="fr" suppressHydrationWarning>
+      <body className={inter.className}>
+        <ThemeProvider>
+          <header className="border-b border-border">
+            <div className="container flex h-14 items-center justify-between">
+              <Link href="/" className="font-semibold">
+                Meditation
+              </Link>
+              <nav className="flex items-center gap-2">
+                <Link href="/dashboard">
+                  <Button variant="ghost" size="sm">Tableau de bord</Button>
+                </Link>
+                <Link href="/login">
+                  <Button variant="ghost" size="sm">Se connecter</Button>
+                </Link>
+                <ThemeToggle />
+              </nav>
+            </div>
+          </header>
 
-      <form onSubmit={onSubmit} className="space-y-4">
-        <label className="block">
-          <span className="text-sm text-muted-foreground">Adresse e-mail</span>
-          <input
-            type="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="vous@example.com"
-            className="mt-1 w-full rounded-md border bg-background px-3 py-2 outline-none focus:ring"
-          />
-        </label>
-
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full rounded-md bg-primary px-4 py-2 text-primary-foreground disabled:opacity-50"
-        >
-          {loading ? "Envoi..." : "Recevoir un lien magique"}
-        </button>
-      </form>
-
-      {sent === "ok" && (
-        <p className="mt-4 text-sm text-green-600">
-          Lien envoyé ! Consulte ton e-mail et clique sur “Se connecter”.
-        </p>
-      )}
-      {sent === "err" && (
-        <p className="mt-4 text-sm text-red-600">
-          Impossible d’envoyer l’e-mail. Vérifie la configuration Supabase Email.
-        </p>
-      )}
-
-      <p className="mt-8 text-xs text-muted-foreground">
-        Astuce: dans Supabase → Authentication → URL Configuration :
-        <br />
-        Site URL = <code>{`https://meditation-dusky-three.vercel.app`}</code>
-        <br />
-        Redirect URLs incluent <code>/auth/callback</code>
-      </p>
-    </div>
+          <main className="container py-8">{children}</main>
+        </ThemeProvider>
+      </body>
+    </html>
   );
 }

@@ -2,8 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Design tokens – Light theme */
+/* ===== Design tokens – Light theme ===== */
 :root {
+  /* préférences générales */
+  color-scheme: light;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* palette HSL (utilisée avec hsl(var(--token))) */
   --background: 0 0% 100%;
   --foreground: 222 47% 11%;
 
@@ -24,7 +29,7 @@
   --ring: 258 90% 60%;
 }
 
-/* Dark theme */
+/* ===== Dark theme via data-attribute ===== */
 [data-theme="dark"] {
   --background: 222 47% 5%;
   --foreground: 210 40% 98%;
@@ -46,16 +51,19 @@
   --ring: 258 92% 70%;
 }
 
-html, body {
-  height: 100%;
-}
+/* ===== Base ===== */
+html, body { height: 100%; }
 
 body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
 }
 
-/* container responsif */
+/* Petits resets utiles */
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+
+/* Container responsif cohérent */
 .container {
-  @apply mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl;
+  @apply mx-auto max-w-5xl px-4 sm:px-6 lg:px-8;
 }
