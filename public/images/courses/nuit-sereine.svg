@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-labelledby="title desc">
+  <title id="title">Nuit sereine</title>
+  <desc id="desc">Illustration abstraite bleue nuit pour le cours Nuit sereine</desc>
+  <defs>
+    <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e3a8a" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#gradient)" rx="32" />
+  <g fill="#facc15" opacity="0.8">
+    <circle cx="620" cy="120" r="60" />
+    <circle cx="140" cy="80" r="8" />
+    <circle cx="200" cy="180" r="6" />
+    <circle cx="260" cy="120" r="5" />
+    <circle cx="520" cy="200" r="7" />
+  </g>
+</svg>
