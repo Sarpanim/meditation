@@ -1,0 +1,108 @@
+import type { Course } from "@/types/course";
+
+export const courses: Course[] = [
+  {
+    id: "respiration-douce",
+    slug: "respiration-douce",
+    title: "Respiration douce",
+    subtitle: "Ancrer votre journée avec un souffle paisible.",
+    description:
+      "Un parcours progressif pour apprivoiser votre respiration, calmer le mental et installer un rituel matinal simple.",
+    durationMinutes: 45,
+    level: "beginner",
+    category: "Relaxation",
+    thumbnail: "/images/courses/respiration-douce.svg",
+    lessonsCount: 8,
+  },
+  {
+    id: "pause-consciente",
+    slug: "pause-consciente",
+    title: "Pause consciente",
+    subtitle: "Recentrage express pour les journées chargées.",
+    description:
+      "Des exercices courts à intégrer dans vos pauses pour relâcher la pression, retrouver votre concentration et repartir léger.",
+    durationMinutes: 30,
+    level: "beginner",
+    category: "Focus",
+    thumbnail: "/images/courses/pause-consciente.svg",
+    lessonsCount: 6,
+  },
+  {
+    id: "nuit-sereine",
+    slug: "nuit-sereine",
+    title: "Nuit sereine",
+    subtitle: "Préparer le corps et l’esprit au sommeil réparateur.",
+    description:
+      "Une routine du soir pour relâcher les tensions, apaiser les pensées et favoriser un endormissement profond.",
+    durationMinutes: 60,
+    level: "beginner",
+    category: "Sommeil",
+    thumbnail: "/images/courses/nuit-sereine.svg",
+    lessonsCount: 10,
+  },
+  {
+    id: "gestion-du-stress",
+    slug: "gestion-du-stress",
+    title: "Gestion du stress",
+    subtitle: "Transformer les tensions en énergie constructive.",
+    description:
+      "Explorez des techniques de méditation et de visualisation pour accueillir vos émotions et cultiver la résilience au quotidien.",
+    durationMinutes: 75,
+    level: "intermediate",
+    category: "Gestion du stress",
+    thumbnail: "/images/courses/gestion-du-stress.svg",
+    lessonsCount: 9,
+  },
+  {
+    id: "energie-matinale",
+    slug: "energie-matinale",
+    title: "Énergie matinale",
+    subtitle: "Réveiller le corps avec douceur et tonus.",
+    description:
+      "Un programme dynamique mêlant visualisation, respiration et étirements pour lancer la journée avec enthousiasme.",
+    durationMinutes: 40,
+    level: "intermediate",
+    category: "Vitalité",
+    thumbnail: "/images/courses/energie-matinale.svg",
+    lessonsCount: 7,
+  },
+  {
+    id: "marche-meditative",
+    slug: "marche-meditative",
+    title: "Marche méditative",
+    subtitle: "Transformer chaque pas en pratique consciente.",
+    description:
+      "Découvrez comment marcher en pleine conscience, ressentir votre environnement et installer un rythme apaisé.",
+    durationMinutes: 55,
+    level: "intermediate",
+    category: "Plein air",
+    thumbnail: "/images/courses/marche-meditative.svg",
+    lessonsCount: 8,
+  },
+  {
+    id: "silence-creatif",
+    slug: "silence-creatif",
+    title: "Silence créatif",
+    subtitle: "Clarifier vos idées grâce au calme intérieur.",
+    description:
+      "Des explorations guidées pour libérer l’imagination, prendre du recul et poser des intentions claires.",
+    durationMinutes: 90,
+    level: "advanced",
+    category: "Créativité",
+    thumbnail: "/images/courses/silence-creatif.svg",
+    lessonsCount: 12,
+  },
+  {
+    id: "compassion-active",
+    slug: "compassion-active",
+    title: "Compassion active",
+    subtitle: "Renforcer l’empathie envers soi et les autres.",
+    description:
+      "Un cycle avancé pour cultiver la bienveillance, se reconnecter aux autres et développer une présence attentive.",
+    durationMinutes: 80,
+    level: "advanced",
+    category: "Bien-être",
+    thumbnail: "/images/courses/compassion-active.svg",
+    lessonsCount: 9,
+  },
+];

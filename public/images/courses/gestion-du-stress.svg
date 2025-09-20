@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-labelledby="title desc">
+  <title id="title">Gestion du stress</title>
+  <desc id="desc">Illustration abstraite turquoise et corail pour le cours Gestion du stress</desc>
+  <defs>
+    <linearGradient id="gradient" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#14b8a6" />
+      <stop offset="100%" stop-color="#f97316" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#gradient)" rx="32" />
+  <g fill="#ecfeff" opacity="0.75">
+    <rect x="140" y="100" width="180" height="180" rx="48" />
+    <circle cx="500" cy="180" r="90" />
+    <rect x="420" y="280" width="220" height="90" rx="32" />
+  </g>
+</svg>

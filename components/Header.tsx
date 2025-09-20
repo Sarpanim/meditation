@@ -1,38 +1,58 @@
+"use client";
+
 import Link from "next/link";
-import Button from "@/components/Button";
-import { AUTH_COOKIE_NAME } from "@/lib/auth";
-import { cookies } from "next/headers";
+import { usePathname } from "next/navigation";
+import { ThemeToggle } from "./theme-toggle";
+import { cn } from "@/components/ui/cn";
 
-type HeaderProps = {
-  isAuthenticated: boolean;
-};
+const NAV = [
+  { href: "/dashboard", label: "Tableau de bord" },
+  { href: "/courses", label: "Catalogue" },
+];
 
-export default function Header({ isAuthenticated }: HeaderProps) {
-  async function handleLogout() {
-    "use server";
-    cookies().delete(AUTH_COOKIE_NAME);
-  }
+export default function Header() {
+  const pathname = usePathname();
 
   return (
-    <header className="border-b border-slate-200 bg-white/80 backdrop-blur">
-      <div className="mx-auto flex w-full max-w-3xl items-center justify-between px-4 py-3">
-        <Link href="/" className="text-base font-semibold text-slate-900">
+    <header className="sticky top-0 z-40 w-full border-b bg-background/80 backdrop-blur">
+      <div className="mx-auto flex h-14 w-full max-w-6xl items-center gap-3 px-4">
+        <Link
+          href="/"
+          className="mr-4 whitespace-nowrap text-sm font-semibold tracking-tight"
+        >
           Meditation
         </Link>
-        <nav className="flex items-center gap-2">
-          {isAuthenticated ? (
-            <>
-              <Button href="/dashboard" variant="secondary">
-                Tableau de bord
-              </Button>
-              <form action={handleLogout}>
-                <Button type="submit">Se déconnecter</Button>
-              </form>
-            </>
-          ) : (
-            <Button href="/login">Se connecter</Button>
-          )}
+
+        <nav className="flex-1 overflow-x-auto">
+          <ul className="flex items-center gap-2">
+            {NAV.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className={cn(
+                    "inline-flex items-center rounded-md px-3 py-2 text-sm transition-colors",
+                    "hover:text-primary",
+                    pathname?.startsWith(item.href)
+                      ? "text-primary"
+                      : "text-muted-foreground"
+                  )}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </nav>
+
+        <div className="ml-auto flex items-center gap-2">
+          <ThemeToggle />
+          <Link
+            href="/login"
+            className="inline-flex items-center rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground shadow hover:opacity-90"
+          >
+            Se connecter
+          </Link>
+        </div>
       </div>
     </header>
   );

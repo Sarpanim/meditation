@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-labelledby="title desc">
+  <title id="title">Compassion active</title>
+  <desc id="desc">Illustration abstraite rouge et violet pour le cours Compassion active</desc>
+  <defs>
+    <linearGradient id="gradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f97316" />
+      <stop offset="100%" stop-color="#7c3aed" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#gradient)" rx="32" />
+  <g fill="#fee2e2" opacity="0.85">
+    <circle cx="200" cy="160" r="70" />
+    <circle cx="340" cy="260" r="60" />
+    <circle cx="520" cy="200" r="90" />
+    <circle cx="650" cy="120" r="50" />
+  </g>
+</svg>

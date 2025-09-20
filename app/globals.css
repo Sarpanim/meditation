@@ -2,18 +2,68 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ===== Design tokens – Light theme ===== */
 :root {
+  /* préférences générales */
   color-scheme: light;
-  background-color: #f8fafc;
-  color: #0f172a;
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* palette HSL (utilisée avec hsl(var(--token))) */
+  --background: 0 0% 100%;
+  --foreground: 222 47% 11%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+
+  --primary: 258 90% 60%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 222 14% 95%;
+  --secondary-foreground: 222 47% 11%;
+
+  --muted: 220 14% 96%;
+  --muted-foreground: 222 10% 40%;
+
+  --border: 220 13% 90%;
+  --input: 220 13% 90%;
+  --ring: 258 90% 60%;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+/* ===== Dark theme via data-attribute ===== */
+[data-theme="dark"] {
+  --background: 222 47% 5%;
+  --foreground: 210 40% 98%;
+
+  --card: 222 47% 7%;
+  --card-foreground: 210 40% 98%;
+
+  --primary: 258 92% 70%;
+  --primary-foreground: 222 47% 10%;
+
+  --secondary: 222 17% 16%;
+  --secondary-foreground: 210 40% 98%;
+
+  --muted: 222 17% 16%;
+  --muted-foreground: 214 31% 80%;
+
+  --border: 222 17% 16%;
+  --input: 222 17% 16%;
+  --ring: 258 92% 70%;
 }
 
-button {
-  font-family: inherit;
+/* ===== Base ===== */
+html, body { height: 100%; }
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+/* Petits resets utiles */
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+
+/* Container responsif cohérent */
+.container {
+  @apply mx-auto max-w-5xl px-4 sm:px-6 lg:px-8;
 }

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-labelledby="title desc">
+  <title id="title">Silence créatif</title>
+  <desc id="desc">Illustration abstraite bleu et magenta pour le cours Silence créatif</desc>
+  <defs>
+    <linearGradient id="gradient" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1e3a8a" />
+      <stop offset="100%" stop-color="#c026d3" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#gradient)" rx="32" />
+  <g fill="#f5d0fe" opacity="0.8">
+    <circle cx="180" cy="220" r="85" />
+    <circle cx="400" cy="120" r="55" />
+    <circle cx="580" cy="260" r="95" />
+  </g>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-labelledby="title desc">
+  <title id="title">Pause consciente</title>
+  <desc id="desc">Illustration abstraite violette et orange pour le cours Pause consciente</desc>
+  <defs>
+    <linearGradient id="gradient" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c4b5fd" />
+      <stop offset="100%" stop-color="#fb923c" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#gradient)" rx="32" />
+  <g fill="#fff7ed" opacity="0.85">
+    <circle cx="200" cy="120" r="70" />
+    <rect x="340" y="180" width="180" height="120" rx="48" />
+    <circle cx="620" cy="300" r="80" />
+  </g>
+</svg>

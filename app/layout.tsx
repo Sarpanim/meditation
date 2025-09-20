@@ -1,32 +1,49 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from "@/components/Header";
-import { cookies } from "next/headers";
-import { AUTH_COOKIE_NAME } from "@/lib/auth";
+import { Inter } from "next/font/google";
+import ThemeProvider from "@/components/theme-provider";
+import ThemeToggle from "@/components/theme-toggle";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Meditation",
     default: "Meditation",
+    template: "%s | Meditation",
   },
-  description:
-    "Meditation est une base Next.js prête pour démarrer rapidement une application avec authentification Supabase ou démo.",
+  description: "Base Next.js + Supabase, themable & rapide",
 };
 
-type RootLayoutProps = {
+export default function RootLayout({
+  children,
+}: {
   children: React.ReactNode;
-};
-
-export default function RootLayout({ children }: RootLayoutProps) {
-  const isAuthenticated = cookies().get(AUTH_COOKIE_NAME)?.value === "true";
-
+}) {
   return (
-    <html lang="fr">
-      <body className="bg-slate-50 text-slate-900">
-        <Header isAuthenticated={isAuthenticated} />
-        <main className="mx-auto flex min-h-[calc(100vh-4rem)] w-full max-w-3xl flex-col px-4 pb-12 pt-6">
-          {children}
-        </main>
+    <html lang="fr" suppressHydrationWarning>
+      <body className={inter.className}>
+        <ThemeProvider>
+          <header className="border-b border-border">
+            <div className="container flex h-14 items-center justify-between">
+              <Link href="/" className="font-semibold">
+                Meditation
+              </Link>
+              <nav className="flex items-center gap-2">
+                <Link href="/dashboard">
+                  <Button variant="ghost" size="sm">Tableau de bord</Button>
+                </Link>
+                <Link href="/login">
+                  <Button variant="ghost" size="sm">Se connecter</Button>
+                </Link>
+                <ThemeToggle />
+              </nav>
+            </div>
+          </header>
+
+          <main className="container py-8">{children}</main>
+        </ThemeProvider>
       </body>
     </html>
   );
