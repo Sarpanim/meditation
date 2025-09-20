@@ -1,68 +1,43 @@
-import CourseCard from "@/components/catalog/CourseCard";
-import CourseFilters from "@/components/CourseFilters";
-import Button from "@/components/Button";
-import { COURSE_LEVEL_LABELS, getAllCourses } from "@/types/course";
+import Link from "next/link";
+import { supabaseServer } from "@/lib/supabase-server";
 
-const catalog = getAllCourses();
-const categoryOptions = Array.from(new Set(catalog.map((course) => course.category)))
-  .sort((a, b) => a.localeCompare(b))
-  .map((category) => ({
-    value: category,
-    label: category,
-  }));
-const levelOptions = (Object.entries(COURSE_LEVEL_LABELS) as Array<[keyof typeof COURSE_LEVEL_LABELS, string]>).map(
-  ([value, label]) => ({
-    value,
-    label,
-  }),
-);
+export const dynamic = "force-static";
 
-type CoursesPageProps = {
-  searchParams: {
-    category?: string;
-    level?: string;
-  };
-};
-
-export default function CoursesPage({ searchParams }: CoursesPageProps) {
-  const selectedCategory = searchParams.category ?? "";
-  const selectedLevel = searchParams.level ?? "";
-
-  const filteredCourses = catalog.filter((course) => {
-    const categoryMatch = !selectedCategory || course.category === selectedCategory;
-    const levelMatch = !selectedLevel || course.level === selectedLevel;
-    return categoryMatch && levelMatch;
-  });
+export default async function CoursesPage() {
+  const supabase = supabaseServer();
+  const { data: courses } = await supabase
+    .from("courses")
+    .select("id,title,description,category,price_cents,published")
+    .eq("published", true)
+    .order("created_at", { ascending: false });
 
   return (
-    <section className="flex flex-col gap-6 py-8">
-      <div className="flex flex-col gap-3">
-        <h1 className="text-3xl font-bold sm:text-4xl">Tous les cours</h1>
-        <p className="text-base text-slate-600 sm:text-lg">
-          Explorez des parcours de méditation variés, adaptés à chaque niveau et à chaque moment de la journée.
-        </p>
-      </div>
-      <CourseFilters
-        categories={categoryOptions}
-        levels={levelOptions}
-        selectedCategory={selectedCategory}
-        selectedLevel={selectedLevel}
-      />
-      {filteredCourses.length > 0 ? (
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {filteredCourses.map((course) => (
-            <CourseCard key={course.id} course={course} />
-          ))}
-        </div>
+    <main className="mx-auto max-w-5xl px-4 py-10">
+      <h1 className="text-2xl font-semibold mb-6">Catalogue des cours</h1>
+      {!courses?.length ? (
+        <p className="opacity-70">Aucun cours publié pour le moment.</p>
       ) : (
-        <div className="flex flex-col items-center gap-4 rounded-2xl border border-dashed border-slate-200 bg-white p-8 text-center shadow-sm">
-          <p className="text-lg font-semibold">Aucun cours ne correspond aux filtres sélectionnés.</p>
-          <p className="text-sm text-slate-600">Essayez une autre catégorie ou un autre niveau pour découvrir davantage de contenus.</p>
-          <Button href="/courses" variant="secondary">
-            Réinitialiser les filtres
-          </Button>
-        </div>
+        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {courses!.map((c) => (
+            <li key={c.id} className="rounded-2xl border p-4 shadow-sm hover:shadow">
+              <div className="text-sm uppercase opacity-60">{c.category || "Général"}</div>
+              <h2 className="mt-1 text-lg font-medium">{c.title}</h2>
+              <p className="mt-2 text-sm line-clamp-3">{c.description}</p>
+              <div className="mt-4 flex items-center justify-between">
+                <span className="text-sm font-medium">
+                  {c.price_cents ? (c.price_cents / 100).toFixed(2) + " €" : "Gratuit"}
+                </span>
+                <Link
+                  href={`/courses/${c.id}`}
+                  className="rounded-xl bg-primary px-4 py-2 text-white hover:opacity-90"
+                >
+                  Voir
+                </Link>
+              </div>
+            </li>
+          ))}
+        </ul>
       )}
-    </section>
+    </main>
   );
 }
